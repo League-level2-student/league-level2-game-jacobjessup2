@@ -4,7 +4,7 @@ public class Game {
 JFrame frame = new JFrame();
 	
 	static final int GAMEWIDTH = 800;
-	static final int GAMEHEIGHT = 500;
+	static final int GAMEHEIGHT = 400;
 	
 	Panel panel = new Panel();
 	

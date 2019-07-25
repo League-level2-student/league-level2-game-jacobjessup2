@@ -2,7 +2,6 @@ import java.awt.Rectangle;
 
 public class Objects {
 
-	
 	int x;
 	int y;
 	int width;

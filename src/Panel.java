@@ -6,7 +6,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class Panel extends JPanel implements ActionListener, KeyListener {
 	
@@ -16,11 +18,13 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 	int currentState = 0;
 	Font TitleFont = new Font("Arial", Font.PLAIN, 48);
 	Font TextFont = new Font("Arial", Font.PLAIN, 20);
-	
+	Timer frameDraw;
+	Block player = new Block(50,250,50,50);
 	
 	
 	Panel(){
-		
+		frameDraw = new Timer(1000/60, this);
+		frameDraw.start();
 	}
 
 	public void paintComponent(Graphics g) {
@@ -35,7 +39,7 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 		else if(currentState == END) {
 			drawEndState(g);
 		}
-		repaint();
+		
 	}
 	
 	void drawMenuState(Graphics g){
@@ -46,6 +50,7 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 	void drawGameState(Graphics g) {
 		g.setColor(Color.white);
 		g.fillRect(0, 0, Game.GAMEWIDTH, Game.GAMEHEIGHT);
+		player.draw(g);
 	}
 	
 	void drawEndState(Graphics g) {
@@ -77,12 +82,26 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 			}
 		}
 		
+		
+		if(e.getKeyCode() == e.VK_UP) {
+			player.isUp = true;
+		}
+		
+		if(e.getKeyCode() == e.VK_DOWN) {
+			player.isDown = true;
+		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
+		if(e.getKeyCode() == e.VK_UP) {
+			player.isUp = false;
+		}
 		
+		if(e.getKeyCode() == e.VK_DOWN) {
+			player.isDown = false;
+		}
 	}
 
 
@@ -90,7 +109,7 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		repaint();
 	}
 	
 	
