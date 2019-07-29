@@ -45,21 +45,49 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 	void drawMenuState(Graphics g){
 		g.setColor(Color.blue);
 		g.fillRect(0, 0, Game.GAMEWIDTH, Game.GAMEHEIGHT);
+		g.setFont(TitleFont);
+		g.setColor(Color.white);
+		//TODO think of name
+		g.drawString("Game", 325, 75);
+		g.setFont(TextFont);
+		g.drawString("Press ENTER to start the game.", 260, 150);
+		g.drawString("Use the arrow keys to move up and down.", 215, 220);
+		g.drawString("Stop the other objects from getting past you.", 206, 290);
 	}
 	
 	void drawGameState(Graphics g) {
 		g.setColor(Color.white);
 		g.fillRect(0, 0, Game.GAMEWIDTH, Game.GAMEHEIGHT);
 		player.draw(g);
+		player.boundaries();
 	}
 	
 	void drawEndState(Graphics g) {
 		g.setColor(Color.black);
 		g.fillRect(0, 0, Game.GAMEWIDTH, Game.GAMEHEIGHT);
+		g.setColor(Color.white);
+		g.setFont(TitleFont);
+		g.drawString("GAME OVER", 250, 75);
 	}
 	
 	
 	
+	void updateMenuState(){
+		
+	}
+	
+	void updateGameState() {
+		
+		if (player.isUp) {
+			player.up();
+		}
+		if (player.isDown) {
+			player.down();
+		}
+		
+	}
+	
+	void updateEndState() {}
 	
 	
 	
@@ -109,6 +137,14 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if(currentState == MENU){
+		    updateMenuState();
+		}else if(currentState == GAME){
+		    updateGameState();
+		}else if(currentState == END){
+		    updateEndState();
+		}
+		
 		repaint();
 	}
 	
