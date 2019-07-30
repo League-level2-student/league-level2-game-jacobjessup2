@@ -7,18 +7,28 @@ Random rand = new Random();
 	
 	Enemies(int x, int y, int width, int height){
 		super(x,y,width,height);
-		speed = rand.nextInt(5)+5;
+		//difficulty changes speen
+		if(Panel.difficulty == Panel.EASY) {
+			speed = 5;
+		}
+		else if(Panel.difficulty == Panel.MEDIUM) {
+			speed = 10;
+		}
+		else if(Panel.difficulty == Panel.IMPOSSIBLE) {
+			speed = 15;
+		}
+		
 	}
 	
 	void update() {
+		//makes the Enemies move
 		x-=speed;
 		super.update();
 	}
 	
 	void draw(Graphics g) {
-		g.setColor(Color.black);
-		g.fillRect(x, y, width, height);
+		//makes the Enemies show up
 		g.setColor(Color.red);
-		g.drawRect(x, y, width, height);
+		g.fillRect(x, y, width, height);
 	}
 }
