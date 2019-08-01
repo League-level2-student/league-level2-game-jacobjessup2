@@ -21,7 +21,7 @@ public class Objects {
 	
 	
 	void update(){
-		//allows the game to check if you block an Enemy or if they get past you
+		//allows the game to check if you blocked an Enemy or if they got past you
 		collisionBox.setBounds(x, y, width, height);
 	}
 	

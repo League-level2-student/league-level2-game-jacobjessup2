@@ -9,9 +9,12 @@ public class Block extends Objects {
 	
 	Block(int x, int y, int width, int height){
 	super (x,y,width,height);
-	speed = 15;
+	speed = 5;
 	}
 	
+	void speedPower() {
+		speed = 8;
+	}
 	
 	void draw(Graphics g) {
 	g.setColor(Color.blue);	
@@ -33,11 +36,11 @@ public class Block extends Objects {
 	}
 	//movement stuff
 	void up() {
-		y-= 5;
+		y-= speed;
 	}
 	
 	void down() {
-		y+= 5;
+		y+= speed;
 	}
 	
 	

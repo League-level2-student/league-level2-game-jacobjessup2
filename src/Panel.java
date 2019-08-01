@@ -5,10 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
 
 public class Panel extends JPanel implements ActionListener, KeyListener {
 	//screen states
@@ -27,7 +29,10 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 	Font GameFont = new Font("Arial",Font.PLAIN, 15);
 	Timer frameDraw;
 	Timer enemySpawn;
+	Timer powerUpTimer;
 	Block player;
+	Random rando = new Random();
+	int pow = 0;
 	ObjectStuff u = new ObjectStuff(player);
 	
 	
@@ -117,11 +122,49 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 		if (u.play.isDown) {
 			u.play.down();
 		}
-		
+		//power ups
+		if(u.powerUp == true) {
+			u.powerUp = false;
+			boost();
+		}
 	}
 	
 	
-	
+	void boost() {
+		pow = rando.nextInt(3)+1;
+		System.out.println("power up");
+		//size of player increase
+		if(pow == 1) {
+			System.out.println("size");
+		}
+		//speed of player increase
+		if(pow == 2) {
+			u.play.speedPower();
+			System.out.println("speed p");
+			powerUpTimer = new Timer(1000, this);
+			powerUpTimer.start();
+			//fix
+			long startTime = System.currentTimeMillis();
+			long stopTime = 0;
+			long elapsed = 0;
+			while((5000-elapsed)>0) {
+				stopTime = System.currentTimeMillis();
+				elapsed += stopTime - startTime;
+				System.out.println(elapsed);
+				if((5000-elapsed)<0) {
+					u.play.speed = 5;
+				}
+			}
+			
+//			if(powerUpTimer.get == 30000) {
+//				u.play.speed = 5;
+//			}
+		}
+		//speed of enemies decrease
+		if(pow == 3) {
+			System.out.println("speed e");
+		}
+	}
 	
 	
 	

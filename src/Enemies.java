@@ -3,7 +3,6 @@ import java.awt.Graphics;
 import java.util.Random;
 
 public class Enemies extends Objects {
-Random rand = new Random();
 	
 	Enemies(int x, int y, int width, int height){
 		super(x,y,width,height);

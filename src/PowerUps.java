@@ -5,7 +5,15 @@ public class PowerUps extends Objects {
 Color f = new Color(0, 255, 50);
 	PowerUps(int x, int y, int width, int height) {
 		super(x, y, width, height);
-		speed = 7;
+		if(Panel.difficulty == Panel.EASY) {
+			speed = 5;
+		}
+		else if(Panel.difficulty == Panel.MEDIUM) {
+			speed = 10;
+		}
+		else if(Panel.difficulty == Panel.IMPOSSIBLE) {
+			speed = 15;
+		}
 	}
 
 	
@@ -17,17 +25,9 @@ Color f = new Color(0, 255, 50);
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	void draw(Graphics g) {
-		g.setColor(f);
+		g.setColor(Color.green);
+		g.fillRect(x, y, width, height);
 	}
 	
 	

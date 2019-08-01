@@ -8,9 +8,11 @@ public class ObjectStuff implements ActionListener{
 
 	Block play;
 	ArrayList<Enemies> enemies = new ArrayList<Enemies>();
+	ArrayList<PowerUps> power = new ArrayList<PowerUps>();
 	Random random = new Random();
+	int spawn = 0;
 	int score = 0;
-	
+	static boolean powerUp = false;
 	ObjectStuff(Block f){
 		f = new Block(75,250,50,50);
 		play = f;
@@ -21,6 +23,10 @@ public class ObjectStuff implements ActionListener{
 		enemies.add(new Enemies(Game.GAMEWIDTH, random.nextInt(Game.GAMEHEIGHT-50), 25,25));
 	}
 	
+	void addPowerUps() {
+		//makes power ups spawn
+		power.add(new PowerUps(Game.GAMEWIDTH, random.nextInt(Game.GAMEHEIGHT-50), 25,25));
+	}
 	
 	void update() {
 		//if the enemies get past you it's game over
@@ -31,6 +37,9 @@ public class ObjectStuff implements ActionListener{
 				play.isActive = false;
 			}
 			play.update();
+		}
+		for (int i = 0; i < power.size(); i++) {
+			power.get(i).update();
 		}
 		//stuff to remove Enemies if you block them
 		collision();
@@ -44,12 +53,23 @@ public class ObjectStuff implements ActionListener{
 				score++;
 			}
 		}
+		for (int i = 0; i < power.size(); i++) {
+			if(play.collisionBox.intersects(power.get(i).collisionBox)) {
+				power.get(i).isActive = false;
+				powerUp = true;
+			}
+		}
 	}
 	
 	void purge() {
 		for (int i = 0; i < enemies.size(); i++) {
 			if(enemies.get(i).isActive == false) {
 				enemies.remove(i);
+			}
+		}
+		for (int i = 0; i < power.size(); i++) {
+			if (power.get(i).isActive == false) {
+				power.remove(i);
 			}
 		}
 	}
@@ -60,6 +80,10 @@ public class ObjectStuff implements ActionListener{
 		
 		for (int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).draw(g);
+		}
+		
+		for (int i = 0; i < power.size(); i++) {
+			power.get(i).draw(g);
 		}
 	}
 	
@@ -74,7 +98,13 @@ public class ObjectStuff implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		//spawns enemies
-		addEnemies();
+		spawn = random.nextInt(4);
+		if (spawn == 3) {
+			addPowerUps();
+		}
+		else {
+			addEnemies();
+		}
 	}
 	
 	
