@@ -9,7 +9,7 @@ public class Block extends Objects {
 	
 	Block(int x, int y, int width, int height){
 	super (x,y,width,height);
-	speed = 7;
+	speed = 15;
 	}
 	
 	

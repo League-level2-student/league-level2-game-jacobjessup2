@@ -24,6 +24,7 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 	
 	Font TitleFont = new Font("Arial", Font.PLAIN, 48);
 	Font TextFont = new Font("Arial", Font.PLAIN, 20);
+	Font GameFont = new Font("Arial",Font.PLAIN, 15);
 	Timer frameDraw;
 	Timer enemySpawn;
 	Block player;
@@ -80,6 +81,9 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 		//game stuff
 		g.setColor(Color.white);
 		g.fillRect(0, 0, Game.GAMEWIDTH, Game.GAMEHEIGHT);
+		g.setColor(Color.BLACK);
+		g.setFont(GameFont);
+		g.drawString("" + u.score, Game.GAMEWIDTH-60, 25);
 		u.draw(g);
 		u.play.boundaries();
 	}

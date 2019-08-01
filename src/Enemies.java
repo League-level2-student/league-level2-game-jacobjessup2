@@ -7,7 +7,7 @@ Random rand = new Random();
 	
 	Enemies(int x, int y, int width, int height){
 		super(x,y,width,height);
-		//difficulty changes speen
+		//difficulty changes speed
 		if(Panel.difficulty == Panel.EASY) {
 			speed = 5;
 		}
