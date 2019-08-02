@@ -13,7 +13,7 @@ public class Block extends Objects {
 	}
 	
 	void speedPower() {
-		speed = 8;
+		speed+=1;
 	}
 	
 	void draw(Graphics g) {

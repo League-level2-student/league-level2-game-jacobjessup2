@@ -3,21 +3,24 @@ import java.awt.Graphics;
 import java.util.Random;
 
 public class Enemies extends Objects {
+	static int enemySpeedDown;
 	
 	Enemies(int x, int y, int width, int height){
 		super(x,y,width,height);
 		//difficulty changes speed
 		if(Panel.difficulty == Panel.EASY) {
-			speed = 5;
+			speed = 5 - enemySpeedDown;
 		}
 		else if(Panel.difficulty == Panel.MEDIUM) {
-			speed = 10;
+			speed = 10 - enemySpeedDown;
 		}
 		else if(Panel.difficulty == Panel.IMPOSSIBLE) {
-			speed = 15;
+			speed = 15 - enemySpeedDown;
 		}
 		
 	}
+	
+	
 	
 	void update() {
 		//makes the Enemies move

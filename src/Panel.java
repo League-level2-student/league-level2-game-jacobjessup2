@@ -23,16 +23,27 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 	static final int MEDIUM = 1;
 	static final int IMPOSSIBLE = 2;
 	static int difficulty = 0;
-	
+	//text sizes
 	Font TitleFont = new Font("Arial", Font.PLAIN, 48);
 	Font TextFont = new Font("Arial", Font.PLAIN, 20);
 	Font GameFont = new Font("Arial",Font.PLAIN, 15);
+	
 	Timer frameDraw;
 	Timer enemySpawn;
-	Timer powerUpTimer;
 	Block player;
 	Random rando = new Random();
+	//power ups
 	int pow = 0;
+	
+	int speedUp = 0;
+	int speedCap = 0;
+	
+	int sizeUp = 0;
+	
+	int speedDown = 0;
+	int enemyDownCap = 0;
+	
+	
 	ObjectStuff u = new ObjectStuff(player);
 	
 	
@@ -47,6 +58,12 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 		//spawns Enemies
 		enemySpawn = new Timer(1000, u);
 		enemySpawn.start();
+		speedUp = 0;
+		speedCap = 0;
+		sizeUp = 0;
+		speedDown = 0;
+		enemyDownCap = 0;
+		
 	}
 	
 	
@@ -124,8 +141,8 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 		}
 		//power ups
 		if(u.powerUp == true) {
-			u.powerUp = false;
 			boost();
+			u.powerUp = false;
 		}
 	}
 	
@@ -135,34 +152,69 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 		System.out.println("power up");
 		//size of player increase
 		if(pow == 1) {
-			System.out.println("size");
+			System.out.println("size up player");
 		}
 		//speed of player increase
 		if(pow == 2) {
-			u.play.speedPower();
-			System.out.println("speed p");
-			powerUpTimer = new Timer(1000, this);
-			powerUpTimer.start();
-			//fix
-			long startTime = System.currentTimeMillis();
-			long stopTime = 0;
-			long elapsed = 0;
-			while((5000-elapsed)>0) {
-				stopTime = System.currentTimeMillis();
-				elapsed += stopTime - startTime;
-				System.out.println(elapsed);
-				if((5000-elapsed)<0) {
-					u.play.speed = 5;
+			speedUp++;
+			System.out.println("speed up player");
+			pow = 0;
+			if(speedCap <= 5) {
+				if(speedUp == 3) {
+					u.play.speedPower();
+					speedUp = 0;
+					System.out.println("speed +1");
+					speedCap++;
 				}
 			}
+			else {
+				System.out.println("speed cap reached on player");
+			}
 			
-//			if(powerUpTimer.get == 30000) {
-//				u.play.speed = 5;
-//			}
 		}
 		//speed of enemies decrease
 		if(pow == 3) {
-			System.out.println("speed e");
+			speedDown++;
+			System.out.println("speed down enemies");
+			//if the difficulty is EASY
+			if(difficulty == EASY) {
+				if(enemyDownCap <=2) {
+					if(speedDown == 3) {
+						Enemies.enemySpeedDown++;
+						System.out.println("enemy speed -1");
+						speedDown = 0;
+					}
+				}
+				else {
+					System.out.println("enemy speed down cap reached");
+				}
+			}
+			//if the difficulty is MEDIUM
+			if(difficulty == MEDIUM) {
+				if(enemyDownCap <=3) {
+					if(speedDown == 3) {
+						Enemies.enemySpeedDown++;
+						System.out.println("enemy speed -1");
+						speedDown = 0;
+					}
+				}
+				else {
+					System.out.println("enemy speed down cap reached");
+				}
+			}
+			//if the difficulty is VERY HARD
+			if(difficulty == IMPOSSIBLE) {
+				if(enemyDownCap <=6) {
+					if(speedDown == 3) {
+						Enemies.enemySpeedDown++;
+						System.out.println("enemy speed -1");
+						speedDown = 0;
+					}
+				}
+				else {
+					System.out.println("enemy speed down cap reached");
+				}
+			}
 		}
 	}
 	
