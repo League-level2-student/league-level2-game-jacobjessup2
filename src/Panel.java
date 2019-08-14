@@ -58,16 +58,52 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 		//spawns Enemies
 		enemySpawn = new Timer(1000, u);
 		enemySpawn.start();
+		ObjectStuff.score = 0;
 		speedUp = 0;
 		speedCap = 0;
 		sizeUp = 0;
 		speedDown = 0;
 		enemyDownCap = 0;
+		Enemies.enemySpeedDown = 0;
+		OverTimeSpeed();
 		
 	}
 	
 	
-	
+	void OverTimeSpeed (){
+		if (ObjectStuff.score == 40) {
+			Enemies.TimeSpeedUp++;
+			System.out.println("enemy speed up");
+		}
+		if (ObjectStuff.score == 80) {
+			Enemies.TimeSpeedUp++;
+			System.out.println("enemy speed up");
+		}
+		if (ObjectStuff.score == 120) {
+			Enemies.TimeSpeedUp++;
+			System.out.println("enemy speed up");
+		}
+		if (ObjectStuff.score == 160) {
+			Enemies.TimeSpeedUp++;
+			System.out.println("enemy speed up");
+		}
+		if (ObjectStuff.score == 200) {
+			Enemies.TimeSpeedUp++;
+			System.out.println("enemy speed up");
+		}
+		if (ObjectStuff.score == 240) {
+			Enemies.TimeSpeedUp++;
+			System.out.println("enemy speed up");
+		}
+		if (ObjectStuff.score == 280) {
+			Enemies.TimeSpeedUp++;
+			System.out.println("enemy speed up");
+		}
+		if (ObjectStuff.score == 320) {
+			Enemies.TimeSpeedUp++;
+			System.out.println("enemy speed up");
+		}
+	}
 	
 	
 	public void paintComponent(Graphics g) {
@@ -95,7 +131,7 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(TextFont);
 		g.drawString("Press ENTER to start the game", 250, 140);
 		g.drawString("Use the arrow keys to move up and down", 210, 205);
-		g.drawString("Stop the Enemies from getting past you", 210, 270);
+		g.drawString("Press SHIFT to see what the different colored objects do", 143, 270);
 		g.drawString("Press the SPACEBAR to change the difficulty", 195, 335);
 	}
 	
@@ -124,7 +160,9 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 	
 	
 	
-	
+	void updateMenuState() {
+		
+	}
 	
 	void updateGameState() {
 		u.update();
@@ -146,16 +184,16 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 		}
 	}
 	
+	void updateEndState() {
+		
+	}
 	
 	void boost() {
-		pow = rando.nextInt(3)+1;
+		pow = rando.nextInt(2)+1;
 		System.out.println("power up");
-		//size of player increase
-		if(pow == 1) {
-			System.out.println("size up player");
-		}
+		
 		//speed of player increase
-		if(pow == 2) {
+		if(pow == 1) {
 			speedUp++;
 			System.out.println("speed up player");
 			pow = 0;
@@ -173,7 +211,7 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 			
 		}
 		//speed of enemies decrease
-		if(pow == 3) {
+		if(pow == 2) {
 			speedDown++;
 			System.out.println("speed down enemies");
 			//if the difficulty is EASY
@@ -181,6 +219,7 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 				if(enemyDownCap <=2) {
 					if(speedDown == 3) {
 						Enemies.enemySpeedDown++;
+						enemyDownCap++;
 						System.out.println("enemy speed -1");
 						speedDown = 0;
 					}
@@ -194,6 +233,7 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 				if(enemyDownCap <=3) {
 					if(speedDown == 3) {
 						Enemies.enemySpeedDown++;
+						enemyDownCap++;
 						System.out.println("enemy speed -1");
 						speedDown = 0;
 					}
@@ -207,6 +247,7 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 				if(enemyDownCap <=6) {
 					if(speedDown == 3) {
 						Enemies.enemySpeedDown++;
+						enemyDownCap++;
 						System.out.println("enemy speed -1");
 						speedDown = 0;
 					}
@@ -245,6 +286,14 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 			}
 		}
 		if(currentState == MENU) {
+			
+			if(e.getKeyCode() == e.VK_SHIFT) {
+				JOptionPane.showMessageDialog(null, "Red objects are enemies, if they get past you it's game over.");
+				JOptionPane.showMessageDialog(null, "Green objects are power-ups, they can make you faster or the enemies slower.");
+				JOptionPane.showMessageDialog(null, "Be careful of the fake power-ups, they look slightly darker than power-ups but can slow you down or speed up enemies.");
+				JOptionPane.showMessageDialog(null, "Over time the enemies will get faster.");
+			}
+			
 			if(e.getKeyCode() == e.VK_SPACE) {
 				if(difficulty == IMPOSSIBLE) {
 					difficulty = EASY;
@@ -294,8 +343,14 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		 if(currentState == GAME){
-		    updateGameState();
+		if(currentState == MENU){
+			updateMenuState();
+		}
+		if(currentState == GAME){
+			updateGameState();
+		}
+		if(currentState == END){
+			updateEndState();
 		}
 		repaint();
 	}

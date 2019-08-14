@@ -11,7 +11,8 @@ public class ObjectStuff implements ActionListener{
 	ArrayList<PowerUps> power = new ArrayList<PowerUps>();
 	Random random = new Random();
 	int spawn = 0;
-	int score = 0;
+	static int score = 0;
+	static int highScore = 0;
 	static boolean powerUp = false;
 	ObjectStuff(Block f){
 		f = new Block(75,250,50,50);
@@ -98,8 +99,8 @@ public class ObjectStuff implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		//spawns enemies
-		spawn = random.nextInt(4);
-		if (spawn == 3) {
+		spawn = random.nextInt(20);
+		if (spawn == 0) {
 			addPowerUps();
 		}
 		else {

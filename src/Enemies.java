@@ -4,18 +4,18 @@ import java.util.Random;
 
 public class Enemies extends Objects {
 	static int enemySpeedDown;
-	
+	static int TimeSpeedUp = 0;
 	Enemies(int x, int y, int width, int height){
 		super(x,y,width,height);
 		//difficulty changes speed
 		if(Panel.difficulty == Panel.EASY) {
-			speed = 5 - enemySpeedDown;
+			speed = 5 - enemySpeedDown + TimeSpeedUp;
 		}
 		else if(Panel.difficulty == Panel.MEDIUM) {
-			speed = 10 - enemySpeedDown;
+			speed = 10 - enemySpeedDown + TimeSpeedUp;
 		}
 		else if(Panel.difficulty == Panel.IMPOSSIBLE) {
-			speed = 15 - enemySpeedDown;
+			speed = 15 - enemySpeedDown + TimeSpeedUp;
 		}
 		
 	}
