@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class PowerUps extends Objects {
-Color f = new Color(0, 255, 50);
+Color Green = new Color(0, 255, 0);
 	PowerUps(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		if(Panel.difficulty == Panel.EASY) {
@@ -26,7 +26,7 @@ Color f = new Color(0, 255, 50);
 	
 	
 	void draw(Graphics g) {
-		g.setColor(Color.green);
+		g.setColor(Green);
 		g.fillRect(x, y, width, height);
 	}
 	

@@ -9,10 +9,11 @@ public class ObjectStuff implements ActionListener{
 	Block play;
 	ArrayList<Enemies> enemies = new ArrayList<Enemies>();
 	ArrayList<PowerUps> power = new ArrayList<PowerUps>();
+	ArrayList<PowerDowns> powerD = new ArrayList<PowerDowns>();
 	Random random = new Random();
 	int spawn = 0;
 	static int score = 0;
-	static int highScore = 0;
+	
 	static boolean powerUp = false;
 	ObjectStuff(Block f){
 		f = new Block(75,250,50,50);
@@ -27,6 +28,11 @@ public class ObjectStuff implements ActionListener{
 	void addPowerUps() {
 		//makes power ups spawn
 		power.add(new PowerUps(Game.GAMEWIDTH, random.nextInt(Game.GAMEHEIGHT-50), 25,25));
+	}
+	
+	void addPowerDowns() {
+		//makes power downs spawn
+		powerD.add(new PowerDowns(Game.GAMEWIDTH, random.nextInt(Game.GAMEHEIGHT-50), 25,25));
 	}
 	
 	void update() {
@@ -99,9 +105,12 @@ public class ObjectStuff implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		//spawns enemies
-		spawn = random.nextInt(20);
+		spawn = random.nextInt(4);
 		if (spawn == 0) {
 			addPowerUps();
+		}
+		if (spawn == 1) {
+			addPowerDowns();
 		}
 		else {
 			addEnemies();
