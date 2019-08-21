@@ -13,8 +13,11 @@ public class ObjectStuff implements ActionListener{
 	Random random = new Random();
 	int spawn = 0;
 	static int score = 0;
+	static int highScore = 0;
 	
 	static boolean powerUp = false;
+	static boolean powerDown = false;
+	
 	ObjectStuff(Block f){
 		f = new Block(75,250,50,50);
 		play = f;
@@ -47,6 +50,11 @@ public class ObjectStuff implements ActionListener{
 		}
 		for (int i = 0; i < power.size(); i++) {
 			power.get(i).update();
+			play.update();
+		}
+		for (int i = 0; i < powerD.size(); i++) {
+			powerD.get(i).update();
+			play.update();
 		}
 		//stuff to remove Enemies if you block them
 		collision();
@@ -66,6 +74,12 @@ public class ObjectStuff implements ActionListener{
 				powerUp = true;
 			}
 		}
+		for (int i = 0; i < powerD.size(); i++) {
+			if(play.collisionBox.intersects(powerD.get(i).collisionBox)) {
+				powerD.get(i).isActive = false;
+				powerDown = true;
+			}
+		}
 	}
 	
 	void purge() {
@@ -77,6 +91,11 @@ public class ObjectStuff implements ActionListener{
 		for (int i = 0; i < power.size(); i++) {
 			if (power.get(i).isActive == false) {
 				power.remove(i);
+			}
+		}
+		for (int i = 0; i < powerD.size(); i++) {
+			if (powerD.get(i).isActive == false) {
+				powerD.remove(i);
 			}
 		}
 	}
@@ -91,6 +110,9 @@ public class ObjectStuff implements ActionListener{
 		
 		for (int i = 0; i < power.size(); i++) {
 			power.get(i).draw(g);
+		}
+		for (int i = 0; i < powerD.size(); i++) {
+			powerD.get(i).draw(g);
 		}
 	}
 	
@@ -109,7 +131,7 @@ public class ObjectStuff implements ActionListener{
 		if (spawn == 0) {
 			addPowerUps();
 		}
-		if (spawn == 1) {
+		else if (spawn == 1) {
 			addPowerDowns();
 		}
 		else {

@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class PowerUps extends Objects {
-Color Green = new Color(0, 255, 0);
+Color Green = new Color(0, 255, 50);
 	PowerUps(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		if(Panel.difficulty == Panel.EASY) {

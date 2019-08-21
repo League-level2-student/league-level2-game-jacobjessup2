@@ -38,10 +38,18 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 	int speedUp = 0;
 	int speedCap = 0;
 	
-	int sizeUp = 0;
-	
 	int speedDown = 0;
 	int enemyDownCap = 0;
+	
+	//power downs
+	int debf = 0;
+	
+	int slowUp = 0;
+	int slowCap = 0;
+	
+	int enemyUp = 0;
+	int enemyUpCap = 0;
+	
 	
 	
 	ObjectStuff u = new ObjectStuff(player);
@@ -61,7 +69,6 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 		ObjectStuff.score = 0;
 		speedUp = 0;
 		speedCap = 0;
-		sizeUp = 0;
 		speedDown = 0;
 		enemyDownCap = 0;
 		Enemies.enemySpeedDown = 0;
@@ -155,7 +162,9 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("GAME OVER", 250, 75);
 		g.setFont(TextFont);
 		g.drawString("You stopped " + u.getScore() + " Enemies from getting past you", 190, 170);
-		g.drawString("Press ENTER to restart", 287, 250);
+		g.drawString("The High Score is: " + u.highScore, 300, 230);
+		g.drawString("Press ENTER to restart", 290, 300);
+		
 	}
 	
 	
@@ -182,10 +191,50 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 			boost();
 			u.powerUp = false;
 		}
+		//power downs
+		if(u.powerDown == true) {
+			unBoost();
+			u.powerDown = false;
+		}
 	}
 	
 	void updateEndState() {
+		if(u.score > u.highScore) {
+			u.highScore = u.score;
+		}
+	}
+	
+	void unBoost(){
+		debf = rando.nextInt(2)+1;
+		System.out.println("power down");
 		
+		//speed of player decreases
+		
+		if (debf == 1) {
+			slowUp++;
+			System.out.println("speed down player");
+			if (slowUp == 3) {
+				u.play.speedDown();
+				slowUp = 0;
+				System.out.println("speed -1");
+			}
+		}
+		
+		
+		if (debf == 2) {
+			enemyUp++;
+			System.out.println("speed up enemy");
+			if (enemyUp == 3) {
+				Enemies.enemySpeedUp++;
+				enemyUp = 0;
+				System.out.println("enemy speed +1");
+			}
+		}
+		
+		//speed of enemies increase
+	
+	
+	
 	}
 	
 	void boost() {

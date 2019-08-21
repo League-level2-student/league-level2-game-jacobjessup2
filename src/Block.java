@@ -15,6 +15,9 @@ public class Block extends Objects {
 	void speedPower() {
 		speed+=1;
 	}
+	void speedDown() {
+		speed-=1;
+	}
 	
 	void draw(Graphics g) {
 	g.setColor(Color.blue);	

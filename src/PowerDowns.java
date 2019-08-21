@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class PowerDowns extends Objects{
-Color DarkGreen = new Color (0, 170, 0);
+Color DarkGreen = new Color (100, 170, 0);
 	PowerDowns(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		if(Panel.difficulty == Panel.EASY) {
