@@ -127,11 +127,11 @@ public class ObjectStuff implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		//spawns enemies
-		spawn = random.nextInt(4);
+		spawn = random.nextInt(30);
 		if (spawn == 0) {
 			addPowerUps();
 		}
-		else if (spawn == 1) {
+		else if (spawn == 1 || spawn == 2) {
 			addPowerDowns();
 		}
 		else {

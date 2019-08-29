@@ -20,7 +20,7 @@ JFrame frame = new JFrame();
 		frame.setVisible(true);
 		frame.add(panel);
 		frame.addKeyListener(panel);
-		frame.setSize(GAMEWIDTH, GAMEHEIGHT);
+		frame.setSize(800, GAMEHEIGHT);
 	}
 	
 	

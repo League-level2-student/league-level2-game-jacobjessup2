@@ -131,7 +131,7 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 	void drawMenuState(Graphics g){
 		//menu stuff
 		g.setColor(Color.blue);
-		g.fillRect(0, 0, Game.GAMEWIDTH, Game.GAMEHEIGHT);
+		g.fillRect(0, 0, 900, Game.GAMEHEIGHT);
 		g.setFont(TitleFont);
 		g.setColor(Color.white);
 		g.drawString("Blocker", 305, 75);
@@ -145,7 +145,7 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 	void drawGameState(Graphics g) {
 		//game stuff
 		g.setColor(Color.white);
-		g.fillRect(0, 0, Game.GAMEWIDTH, Game.GAMEHEIGHT);
+		g.fillRect(0, 0, 900, Game.GAMEHEIGHT);
 		g.setColor(Color.BLACK);
 		g.setFont(GameFont);
 		g.drawString("" + u.score, Game.GAMEWIDTH-60, 25);
@@ -156,7 +156,7 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 	void drawEndState(Graphics g) {
 		//game over screen
 		g.setColor(Color.black);
-		g.fillRect(0, 0, Game.GAMEWIDTH, Game.GAMEHEIGHT);
+		g.fillRect(0, 0, 900, Game.GAMEHEIGHT);
 		g.setColor(Color.white);
 		g.setFont(TitleFont);
 		g.drawString("GAME OVER", 250, 75);
@@ -164,10 +164,24 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("You stopped " + u.getScore() + " Enemies from getting past you", 190, 170);
 		g.drawString("The High Score is: " + u.highScore, 300, 230);
 		g.drawString("Press ENTER to restart", 290, 300);
-		
+		g.drawString("The Difficulty was: " + endStateDifficulty(), 270, 360);
 	}
 	
-	
+	String endStateDifficulty() {
+		if(difficulty == EASY) {
+			return "Easy";
+		}
+		if(difficulty == MEDIUM) {
+			return "MEDIUM";
+		}
+		if(difficulty == IMPOSSIBLE) {
+			return "Very Hard";
+		}	
+			
+		else {
+			return null;
+		}
+	}
 	
 	void updateMenuState() {
 		
@@ -213,10 +227,15 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 		if (debf == 1) {
 			slowUp++;
 			System.out.println("speed down player");
-			if (slowUp == 3) {
-				u.play.speedDown();
-				slowUp = 0;
-				System.out.println("speed -1");
+			if(slowCap <= 5) {
+				if (slowUp == 1) {
+					u.play.speedDown();
+					slowUp = 0;
+					System.out.println("speed -1");
+				}
+			}
+			else {
+				System.out.println("player speed down cap reached");
 			}
 		}
 		
@@ -224,17 +243,21 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 		if (debf == 2) {
 			enemyUp++;
 			System.out.println("speed up enemy");
-			if (enemyUp == 3) {
-				Enemies.enemySpeedUp++;
-				enemyUp = 0;
-				System.out.println("enemy speed +1");
+			if(enemyUpCap <= 5) {
+				if (enemyUp == 1) {
+					Enemies.enemySpeedUp++;
+					enemyUp = 0;
+					System.out.println("enemy speed +1");
+				}
+			}
+			else {
+				System.out.println("enemy speed at max");
 			}
 		}
 		
 		//speed of enemies increase
 	
-	
-	
+			
 	}
 	
 	void boost() {
@@ -247,7 +270,7 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 			System.out.println("speed up player");
 			pow = 0;
 			if(speedCap <= 5) {
-				if(speedUp == 3) {
+				if(speedUp == 1) {
 					u.play.speedPower();
 					speedUp = 0;
 					System.out.println("speed +1");
@@ -266,7 +289,7 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 			//if the difficulty is EASY
 			if(difficulty == EASY) {
 				if(enemyDownCap <=2) {
-					if(speedDown == 3) {
+					if(speedDown == 1) {
 						Enemies.enemySpeedDown++;
 						enemyDownCap++;
 						System.out.println("enemy speed -1");
@@ -280,7 +303,7 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 			//if the difficulty is MEDIUM
 			if(difficulty == MEDIUM) {
 				if(enemyDownCap <=3) {
-					if(speedDown == 3) {
+					if(speedDown == 1) {
 						Enemies.enemySpeedDown++;
 						enemyDownCap++;
 						System.out.println("enemy speed -1");
@@ -294,7 +317,7 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 			//if the difficulty is VERY HARD
 			if(difficulty == IMPOSSIBLE) {
 				if(enemyDownCap <=6) {
-					if(speedDown == 3) {
+					if(speedDown == 1) {
 						Enemies.enemySpeedDown++;
 						enemyDownCap++;
 						System.out.println("enemy speed -1");
