@@ -69,9 +69,15 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 		ObjectStuff.score = 0;
 		speedUp = 0;
 		speedCap = 0;
+		slowUp = 0;
+		slowCap = 0;
+		enemyUp = 0;
+		enemyUpCap = 0;
 		speedDown = 0;
 		enemyDownCap = 0;
 		Enemies.enemySpeedDown = 0;
+		Enemies.TimeSpeedUp = 0;
+		Enemies.enemySpeedUp = 0;
 		OverTimeSpeed();
 		
 	}
@@ -141,7 +147,9 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("Press SHIFT to see what the different colored objects do", 143, 270);
 		g.drawString("Press the SPACEBAR to change the difficulty", 195, 335);
 	}
-	
+
+
+public
 	void drawGameState(Graphics g) {
 		//game stuff
 		g.setColor(Color.white);
