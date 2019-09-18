@@ -127,7 +127,7 @@ public class ObjectStuff implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		//spawns enemies
-		spawn = random.nextInt(30);
+		spawn = random.nextInt(40);
 		if (spawn == 0) {
 			addPowerUps();
 		}

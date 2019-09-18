@@ -6,7 +6,7 @@ public class Block extends Objects {
 	
 	boolean isUp = false;
 	boolean isDown = false;
-	
+	Color block = new Color (50,205,50);
 	Block(int x, int y, int width, int height){
 	super (x,y,width,height);
 	speed = 5;
@@ -20,7 +20,7 @@ public class Block extends Objects {
 	}
 	
 	void draw(Graphics g) {
-	g.setColor(Color.blue);	
+	g.setColor(block);	
 	g.fillRect(x,y,width,height);
 	}
 	

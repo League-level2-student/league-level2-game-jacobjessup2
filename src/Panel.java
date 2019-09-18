@@ -140,7 +140,7 @@ public class Panel extends JPanel implements ActionListener, KeyListener {
 		g.fillRect(0, 0, 900, Game.GAMEHEIGHT);
 		g.setFont(TitleFont);
 		g.setColor(Color.white);
-		g.drawString("Blocker", 305, 75);
+		g.drawString("Gravity Catcher", 225, 75);
 		g.setFont(TextFont);
 		g.drawString("Press ENTER to start the game", 250, 140);
 		g.drawString("Use the arrow keys to move up and down", 210, 205);
@@ -169,7 +169,7 @@ public
 		g.setFont(TitleFont);
 		g.drawString("GAME OVER", 250, 75);
 		g.setFont(TextFont);
-		g.drawString("You stopped " + u.getScore() + " Enemies from getting past you", 190, 170);
+		g.drawString("You saved " + u.getScore() + " People from falling", 245, 170);
 		g.drawString("The High Score is: " + u.highScore, 300, 230);
 		g.drawString("Press ENTER to restart", 290, 300);
 		g.drawString("The Difficulty was: " + endStateDifficulty(), 270, 360);
@@ -368,7 +368,8 @@ public
 		if(currentState == MENU) {
 			
 			if(e.getKeyCode() == e.VK_SHIFT) {
-				JOptionPane.showMessageDialog(null, "Red objects are enemies, if they get past you it's game over.");
+				JOptionPane.showMessageDialog(null, "Dr. Uptanogud has turned gravity sideways for you and made all the floors of a really tall building disappear. It's your job to save the falling people.");
+				JOptionPane.showMessageDialog(null, "Blue objects are people, if they get past you it's game over.");
 				JOptionPane.showMessageDialog(null, "Green objects are power-ups, they can make you faster or the enemies slower.");
 				JOptionPane.showMessageDialog(null, "Be careful of the fake power-ups, they look slightly darker than power-ups but can slow you down or speed up enemies.");
 				JOptionPane.showMessageDialog(null, "Over time the enemies will get faster.");

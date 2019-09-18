@@ -31,7 +31,7 @@ public class Enemies extends Objects {
 	
 	void draw(Graphics g) {
 		//makes the Enemies show up
-		g.setColor(Color.red);
+		g.setColor(Color.blue);
 		g.fillRect(x, y, width, height);
 	}
 }
